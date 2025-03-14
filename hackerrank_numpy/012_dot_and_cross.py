@@ -3,6 +3,7 @@ N = int(input())
 import numpy as np
 
 A = np.empty((N, N), dtype = np.int64)
+
 B = np.empty((N, N), dtype = np.int64)
 
 for i in range(N) :
