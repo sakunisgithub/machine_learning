@@ -64,6 +64,8 @@ w, b, W_values, B_values = gradient_descent(X, Y, -2, -2, 1, 1000)
 
 print(f"w = {w}, b = {b}")
 
+plt.ion()
+
 for i in range(len(W_values)) :
     ax.scatter(W_values[i], B_values[i], E(X, Y, W_values[i], B_values[i]), color = "red", s = 5, label = f"{i}")
     ax.scatter(W_values[i], B_values[i], -1.5, color = "black", s = 5)
@@ -72,5 +74,7 @@ for i in range(len(W_values)) :
 
     plt.pause(0.3)
 
-plt.show()
+    if not plt.fignum_exists(1) :
+        break
 
+plt.show()
