@@ -21,9 +21,6 @@ for i in range(W.shape[0]) :
     for j in range(W.shape[1]) :
         error[i, j] = np.sum( (Y - f(X, W[i, j], B[i, j]))**2 )
 
-def E(X, Y, w, b) :
-   return(np.sum( (Y - f(X, w, b))**2) )
-   
 contour = plt.contourf(W, B, error, levels=20, cmap='coolwarm', alpha = 0.8)
 
 plt.colorbar(contour, label='Error')
