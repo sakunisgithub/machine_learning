@@ -60,4 +60,41 @@ class DecisionTreeClassifier :
         return node
 
     def find_best_split(self, X, y) :
+        best_gain = float('-inf') 
+
+        best_feature = best_threshold = None
+
+        current_impurity = self.calculate_impurity(y)
+
+        n_examples, n_features = X.shape
+
+        for i in range(n_features) :
+            feature_values = X[:, i]
+
+            sorted_unique_feature_values = np.sort(np.unique(feature_values))
+
+            potential_split_points = (sorted_unique_feature_values[:-1] + sorted_unique_feature_values[1:]) / 2
+
+            for split_point in potential_split_points :
+                y_left = y[X[:, i] <= split_point]
+                y_right = y[X[:, i] > split_point] 
+
+                if len(y_left) == 0 or len(y_right) == 0 :
+                    continue
+
+                gain = self.information_gain(y, y_left, y_right, current_impurity)
+
+                if gain > best_gain :
+                    best_gain = gain
+                    best_feature = i
+                    best_threshold = split_point
+        
+        return (best_feature, best_threshold)
+
+
+    
+    def calculate_impurity(self, y) :
+        pass
+
+    def information_gain(self, y, left, right, current_impurity) :
         pass
